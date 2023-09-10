@@ -1,5 +1,21 @@
 class Control_Keys:
     
+    erased_word = []
+    deleted_word =[]
     
-    if("__main__" == __name__):
+    # every time the enter key is pressed
+    def enter_Key():
+        return "\n"
+    
+    @classmethod
+    def backspace_Key(key_word):
+        global erased_word
+        erased_word.append(str(key_word))
+    
+    @classmethod
+    def delete_Key(key_word):
+        global deleted_word
+        deleted_word.append(str(key_word))
+    
+    if "__main__" == __name__:
         pass
