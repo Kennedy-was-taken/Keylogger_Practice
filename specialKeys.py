@@ -1,11 +1,17 @@
+import files 
+
 class Control_Keys:
     
     erased_word = []
     deleted_word =[]
     
+    def __init__(self):
+        pass
+    
     # every time the enter key is pressed
-    def enter_Key():
-        return "\n"
+    def enter_Key(self,Key):
+        key = files()
+        key.write_file("/n", Key)
     
     @classmethod
     def backspace_Key(key_word):
