@@ -1,8 +1,16 @@
+import os
 
 class write_Read : 
     
     def __init__(self):
         pass
+
+    #Checks whether the file is empty or not
+    def file_is_Empty(self):
+        if os.path.getsize("./Logs/log.txt") == 0:
+            return True
+        else:
+            return False
     
     '''
     Reads the file to check if the last character
@@ -10,12 +18,19 @@ class write_Read :
     '''
     def read_file(self):
         noSpace = False
-        with open("log.txt", "r") as r:
-            last_Character = r.read()[-1]
-            if last_Character == ' ':
-                noSpace = True
+                    
+        with open("./Logs/log.txt", "r") as r:
+            
+            #checks to see if the file isn't empty
+            if os.path.getsize("./Logs/log.txt") == 0:
+                
+                    noSpace = True
             else:
-                noSpace = False
+                last_Character = r.read()[-1]
+                if last_Character == ' ':
+                    noSpace = True
+                else:
+                    pass
 
         return noSpace
 
@@ -29,7 +44,7 @@ class write_Read :
 
             # removes the word space
             if k == str(Key.space):
-                isTrue = read_file()
+                isTrue = self.read_file()
                 if isTrue == True:
                     pass
                 else:
@@ -42,17 +57,25 @@ class write_Read :
 
     # writes the time captured at the beginning
     def time_Start(self,beginning):
-        with open("./Logs/log.txt", "w") as time:
-            time.write(f"Began {format(beginning)}")
+        isEmpty = self.file_is_Empty()
+        if isEmpty:
+            with open("./Logs/log.txt", "w") as time:
+                time.write(f"Began typing at {format(beginning)}\n")
+        else:
+            with open("./Logs/log.txt", "a") as time:
+                time.write(f"Began typing at {format(beginning)}\n")
+        
 
     # writes the time captured at the end
     def time_end(self,end):
-        with open("./Logs/log.txt", "w") as time:
-            time.write(f"\nStopped {__str__(end)}\n")
+        with open("./Logs/log.txt", "a") as time:
+            time.write(f"\nStopped typing at {format(end)}\n")
             time.write("************************************************************\n\n")
 
     # returns a string
     def format(self,time):
-        return (f"typing at : {time.day} {time.month} {time.year}"
-                f"{time.hour}:{time.minute}:{time.second}")
+        structure = (f"{time.day} {time.month} {time.year}"
+                f"{time.hour}:{time.minute}:"
+                f"{time.second}")
+        return structure
 
