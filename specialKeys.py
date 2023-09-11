@@ -15,7 +15,8 @@ class Control_Keys:
         key = write_Read()
         self.start_with_Tab()
         key.write_file("\n", Key)
-        
+    
+    # begins each new line with a tab
     def start_with_Tab(self):
         with open("./Logs/log.txt", "a") as f:
             f.write("\t")
