@@ -11,18 +11,23 @@ from datetime import datetime
 def on_press(key):
 
     print("{0} key was pressed".format(key))
-    if key == str(Key.enter):
+    # removes the quotation marks from being captured
+    k = str(key).replace("'", "")
+    
+    if k == str(Key.enter):
         # calls the enter_key method from the specialKeys.py
         control_key.enter_Key(Key)
 
     else:
         # calls the write_file method from the files.py
-        pressed_key.write_file(key, Key)
+        pressed_key.write_file(k, Key)
 
 # breaks out of the loop
 def on_release(key):
     if key == Key.esc:
+        global isStarted
         isStarted = False
+        captured_time()
         return False
 
 #Captures the time taken 
@@ -40,5 +45,6 @@ if ('__main__' == __name__):
     isStarted = True
     current_Time = ""
     captured_time()
-    # with Listener(on_press=on_press, on_release=on_release) as listener:
-    #     listener.join()
+    control_key.start_with_Tab()
+    with Listener(on_press=on_press, on_release=on_release) as listener:
+        listener.join()

